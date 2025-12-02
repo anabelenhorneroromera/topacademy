@@ -41,10 +41,11 @@
   align-items: center;
 }
 
+/* AQUÍ EL CAMBIO: SIN FILTER, SE VE TAL CUAL LA IMAGEN */
 .main-header__nav-home-logo {
   height: 45px;
   width: auto;
-  filter: brightness(0) invert(1); /* Hace el logo blanco automático */
+  /* filter: brightness(0) invert(1);  <-- QUITADO */
   cursor: pointer;
 }
 
