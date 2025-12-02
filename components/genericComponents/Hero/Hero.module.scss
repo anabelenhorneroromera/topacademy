@@ -1,7 +1,6 @@
 @import "../../../styles/font-mixins.scss";
 @import "../../../styles/colors.scss";
 
-
 .hero {
   background-color: $color-blue-very-light;
   
@@ -12,7 +11,7 @@
 
   &--white {
     @extend .hero;
-    background-color: $color-white-very-light;;
+    background-color: $color-white-very-light;
   }
 
   &--blue {
@@ -45,9 +44,35 @@
     background-color: $color-purple-very-light;
   }
 
+  &--fullscreen {
+    @extend .hero;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--fullscreen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+  }
+
+  &--fullscreen .hero__container {
+    position: relative;
+    z-index: 2;
+  }
+
+
   &__container {
     display: grid;
-    grid-template: 
+    grid-template:
             "media"
             "text"
             / auto;
@@ -206,14 +231,12 @@
 }
 
 
-
-
 @media only screen and (min-width: 850px) {
   .hero {
 
     &__container {
       display: grid;
-      grid-template: 
+      grid-template:
             "text media"
             / 1fr 1fr;
       grid-column-gap: 40px;
@@ -274,11 +297,10 @@
       background-size: contain;
       background-repeat: no-repeat;
       background-position-x: center;
-      background-position-y:center;
+      background-position-y: center;
     }
   }
 }
-
 
 
 @media only screen and (min-width: 1250px) {
@@ -342,7 +364,6 @@
 }
 
 
-
 @media only screen and (min-width: 1400px) {
   .hero {
 
@@ -368,7 +389,6 @@
     }
   }
 }
-
 
 
 @media only screen and (min-width: 1600px) {
