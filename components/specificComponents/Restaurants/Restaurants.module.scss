@@ -1,0 +1,16 @@
+@import "../../../styles/font-mixins.scss";
+@import "../../../styles/colors.scss";
+
+.restaurants-page {
+
+  &__main-content {
+    display: grid;
+    grid-template-columns: 0 auto;
+    max-width: 1440px;
+  }
+
+  &__short-description,
+  &__description {
+    grid-column: 1 / 3;
+  }
+}
