@@ -69,6 +69,13 @@
     z-index: 2;
   }
 
+  &--fullscreen .hero__title,
+  &--fullscreen .hero__subtitle,
+  &--fullscreen .hero__tag {
+    color: white !important;
+    font-family: Verdana, sans-serif !important;
+  }
+
 
   &__container {
     display: grid;
@@ -231,6 +238,8 @@
 }
 
 
+
+
 @media only screen and (min-width: 850px) {
   .hero {
 
@@ -297,10 +306,11 @@
       background-size: contain;
       background-repeat: no-repeat;
       background-position-x: center;
-      background-position-y: center;
+      background-position-y:center;
     }
   }
 }
+
 
 
 @media only screen and (min-width: 1250px) {
@@ -364,6 +374,7 @@
 }
 
 
+
 @media only screen and (min-width: 1400px) {
   .hero {
 
@@ -389,6 +400,7 @@
     }
   }
 }
+
 
 
 @media only screen and (min-width: 1600px) {
