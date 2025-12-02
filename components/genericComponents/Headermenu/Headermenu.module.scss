@@ -3,7 +3,7 @@
 @import "../../../styles/colors";
 
 /* =========================================
-   HEADER MENU – ESTILO RESTAURANTE NEGRO
+   HEADER MENU – FONDO NEGRO + LOGO ORIGINAL
    ========================================= */
 
 .main-header {
@@ -29,7 +29,7 @@
 }
 
 /* -----------------------
-   LOGO
+   LOGO (IMPORTANTE)
 ------------------------- */
 .main-header__nav-home {
   display: flex;
@@ -41,12 +41,15 @@
   align-items: center;
 }
 
-/* AQUÍ EL CAMBIO: SIN FILTER, SE VE TAL CUAL LA IMAGEN */
+/* ⭐️ AQUÍ EL CAMBIO IMPORTANTE:
+   Quitamos el filter para que el logo NO cambie de color.
+*/
 .main-header__nav-home-logo {
-  height: 45px;
+  height: 55px;
   width: auto;
-  /* filter: brightness(0) invert(1);  <-- QUITADO */
   cursor: pointer;
+  filter: none !important;     /* <- Asegura que NO se invierta */
+  background: transparent !important;  /* <- Evita recuadros */
 }
 
 .main-header__nav-home-logo--mobile {
@@ -54,7 +57,7 @@
 }
 
 /* -----------------------
-   LISTA NAVEGACIÓN
+   LISTA DE NAVEGACIÓN
 ------------------------- */
 .main-header__nav-list {
   display: flex;
@@ -72,14 +75,13 @@
   cursor: pointer;
 }
 
-/* Hover elegante dorado */
 .main-header__nav-list a:hover,
 .main-header__nav-list li:hover {
   color: #d4af37 !important; /* dorado */
 }
 
 /* -----------------------
-   BURGER MENU (MOBILE)
+   BURGER MENU
 ------------------------- */
 .main-header__nav-item--menu span {
   font-size: 25px;
@@ -87,7 +89,7 @@
 }
 
 /* -----------------------
-   MOBILE MENU EXPANDIDO
+   MENÚ MÓVIL
 ------------------------- */
 .main-header__expanded-nav {
   position: fixed;
@@ -118,7 +120,7 @@
 }
 
 /* -----------------------
-   GREYED OUT BACKDROP
+   FONDO OSCURECIDO MOBILE
 ------------------------- */
 .main-header__expanded-greyed-out-zone {
   position: fixed;
