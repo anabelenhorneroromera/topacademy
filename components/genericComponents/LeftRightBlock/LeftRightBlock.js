@@ -40,9 +40,8 @@ export default function LeftRightBlock({ blok }) {
           RichTextToHTML({
             document: blok.text,
             textClassName: css["highlighted-content__large-text" + size],
-            boldClassName: css[
-              "highlighted-content__large-text" + cssColorFont + size
-            ]
+            boldClassName:
+              css["highlighted-content__large-text" + cssColorFont + size]
           })}
       </div>
     </section>
