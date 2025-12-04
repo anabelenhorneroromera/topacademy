@@ -43,7 +43,10 @@
 .main-header {
   @include header-font;
 
+  /* Cada item del menú */
   &__nav-item-inner {
+    position: relative; /* NECESARIO para anclar el dropdown */
+
     &:hover {
       .main-header__nav-dropdown {
         display: flex;
@@ -55,18 +58,18 @@
     }
   }
 
+  /* Contenedor que coloca el dropdown justo debajo del enlace */
   &__nav-dropdown-wrapper {
-   position: absolute;
-  width: 100%;
-  height: auto;      // o simplemente ELIMINAR ESTA REGLA
-  top: 100%;         // asegura que empieza justo debajo del enlace
-  left: 0;
-}
-
-  &__nav-dropdown {
     position: absolute;
-    top: 100%;
+    top: 100%;          /* justo debajo del item */
     left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+
+  /* Caja del dropdown */
+  &__nav-dropdown {
+    position: relative;
     display: none;
     flex-direction: column;
     width: 460px;
@@ -74,7 +77,7 @@
     border-radius: 14px;
     border: 2px solid $color-default;
     background-color: white;
-    transform: translateX(-50%);
+    z-index: 1000;
   }
 
   &__dropdown-item-container {
