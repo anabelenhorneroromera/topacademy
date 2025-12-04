@@ -45,7 +45,7 @@
    Quitamos el filter para que el logo NO cambie de color.
 */
 .main-header__nav-home-logo {
-  height: 55px;
+  height: 80px;
   width: auto;
   cursor: pointer;
   filter: none !important;     /* <- Asegura que NO se invierta */
