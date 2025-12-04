@@ -56,10 +56,12 @@
   }
 
   &__nav-dropdown-wrapper {
-    position: absolute;
-    width: 100%;
-    height: 20px;
-  }
+   position: absolute;
+  width: 100%;
+  height: auto;      // o simplemente ELIMINAR ESTA REGLA
+  top: 100%;         // asegura que empieza justo debajo del enlace
+  left: 0;
+}
 
   &__nav-dropdown {
     position: absolute;
