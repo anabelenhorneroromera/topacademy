@@ -1,62 +1,153 @@
-﻿import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
-import React from "react";
-import css from "./Menulink.module.scss";
-import { RichTextToHTML } from "../../../functions/storyBlokRichTextRenderer";
-import Link from "next/link"
+﻿import React, { Component } from "react";
+import css from "./Headermenu.module.scss";
+import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 
-export default function Menulink({ blok, last, index, key, mobile }) {
-	return (
-		<>
-		{mobile && <div {...storyblokEditable(blok)}
-		 className={css["mobile-main-header__nav-item-inner"]}>
-			<Link href={blok.link.cached_url}  >
-				<a className={css["buttonlink-" + last]}>{RichTextToHTML({ document: blok.name, textClassName: css["main-header__dropdown-item-maintext"], boldClassName: css["main-header__dropdown-item-text--highlighted"] })}</a>
-			</Link>
-			{blok.submenulinks != undefined && blok.submenulinks.length > 0 &&
-				<div className={css["mobile-main-header__nav-dropdown-wrapper"]}>
-					<div className={css["mobile-main-header__nav-dropdown"]}>
-						{blok.submenulinks.map((submenulink, index, array) => {
-							return (
-								<>
-									<Link key={submenulink._uid} href={"/"+submenulink.link.cached_url}>
-										<a className={css["mobile-main-header__dropdown-item-container"]}>
-											<img src={submenulink.icon.filename} alt={submenulink.icon.alt} />
-											<div>{RichTextToHTML({ document: submenulink.name, textClassName: css["main-header__dropdown-item-text"], boldClassName: css["main-header__dropdown-item-text--highlighted"] })}</div>
-										</a>
-									</Link>
-								</>
-							)
-						})}
-					</div>
-				</div>
-			}
+export default class Headermenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showNavSideMenu: false,
+      showSearchFlyout: false,
+      expandedNavDropdownOpened: false
+    };
+  }
 
-		</div>}
-		{!mobile && <div {...storyblokEditable(blok)}
-		 className={css["main-header__nav-item-inner"]}>
-			<Link href={blok.link.cached_url}  >
-				<a className={css["buttonlink-" + last]}>{RichTextToHTML({ document: blok.name, textClassName: css["main-header__dropdown-item-maintext"], boldClassName: css["main-header__dropdown-item-text--highlighted"] })}</a>
-			</Link>
-			{blok.submenulinks != undefined && blok.submenulinks.length > 0 &&
-				<div className={css["main-header__nav-dropdown-wrapper"]}>
-					<div className={css["main-header__nav-dropdown"]}>
-						{blok.submenulinks.map((submenulink, index, array) => {
-							return (
-								<>
-									<Link key={submenulink._uid} href={"/"+submenulink.link.cached_url}>
-										<a className={css["main-header__dropdown-item-container"]}>
-											<img src={submenulink.icon.filename} alt={submenulink.icon.alt} />
-											<div>{RichTextToHTML({ document: submenulink.name, textClassName: css["main-header__dropdown-item-text"], boldClassName: css["main-header__dropdown-item-text--highlighted"] })}</div>
-										</a>
-									</Link>
-								</>
-							)
-						})}
-					</div>
-				</div>
-			}
+  toggleNavSideMenu(setPreventDefault, e) {
+    if (setPreventDefault) {
+      e.preventDefault();
+    }
+    this.setState((prevState) => ({
+      showNavSideMenu: !prevState.showNavSideMenu,
+      expandedNavDropdownOpened: false
+    }));
+  }
 
-		</div>}
-		</>
-	);
+  toggleExpandedNavDropdown(e) {
+    e.stopPropagation();
+    this.setState((prevState) => ({
+      expandedNavDropdownOpened: !prevState.expandedNavDropdownOpened
+    }));
+  }
+
+  closeExpandedNavDropdown() {
+    this.setState({
+      expandedNavDropdownOpened: false
+    });
+  }
+
+  navSideMenu() {
+    return (
+      <nav
+        {...storyblokEditable(this.props.blok)}
+        className={css["main-header__expanded-nav"]}
+      >
+        <ul
+          className={[css["main-header__expanded-nav-list"]].join("\n")}
+          onClick={this.closeExpandedNavDropdown.bind(this)}
+        >
+          <li
+            className={css["main-header__expanded-nav-item--home"]}
+            key="mainlogo"
+          >
+            <a href="/">
+              <div className={css["main-header__nav-home-container"]}>
+                {/* LOGO EN EL MENÚ MÓVIL */}
+                <img
+                  src="/images/logo/logo.png"
+                  alt="Serrano & Bretzel logo"
+                  className={css["main-header__nav-home-logo"]}
+                />
+              </div>
+            </a>
+          </li>
+
+          {this.props.blok.menucontent.map((nestedBlok, index) => {
+            return (
+              <li
+                className={css[`main-header__expanded-nav-item--${index}`]}
+                key={nestedBlok._uid}
+              >
+                <StoryblokComponent
+                  blok={nestedBlok}
+                  last={false}
+                  index={index}
+                  mobile={true}
+                />
+              </li>
+            );
+          })}
+        </ul>
+
+        <div
+          className={css["main-header__expanded-greyed-out-zone"]}
+          role="button"
+          tabIndex={-1}
+          onKeyPress={this.toggleNavSideMenu.bind(this, true)}
+          onClick={this.toggleNavSideMenu.bind(this, true)}
+        />
+      </nav>
+    );
+  }
+
+  render() {
+    return (
+      <>
+        <header
+          {...storyblokEditable(this.props.blok)}
+          className={css["main-header"]}
+        >
+          <nav className={css["main-header__nav"]}>
+            {/* LOGO IZQUIERDA */}
+            <nav className={css["main-header__nav-home"]}>
+              <a href="/">
+                <div className={css["main-header__nav-home-container"]}>
+                  <img
+                    src="/images/logo/logo.png"
+                    alt="Serrano & Bretzel logo"
+                    className={css["main-header__nav-home-logo"]}
+                  />
+                </div>
+              </a>
+            </nav>
+
+            {/* LINKS + HAMBURGUESA A LA DERECHA */}
+            <ul className={css["main-header__nav-list"]}>
+              {/* LINKS: Home, Restaurants, Our Plates… */}
+              {this.props.blok.menucontent.map((nestedBlok, index) => {
+                return (
+                  <li
+                    className={css[`main-header__nav-item--${index}`]}
+                    key={nestedBlok._uid}
+                  >
+                    <StoryblokComponent
+                      blok={nestedBlok}
+                      last={false}
+                      index={index}
+                      mobile={false}
+                    />
+                  </li>
+                );
+              })}
+
+              {/* ICONO MENÚ HAMBURGUESA AL FINAL */}
+              <li
+                key="sidenav"
+                className={css["main-header__nav-item--menu"]}
+              >
+                <span
+                  className="mdi mdi-menu"
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={this.toggleNavSideMenu.bind(this, true)}
+                  onClick={this.toggleNavSideMenu.bind(this, true)}
+                />
+              </li>
+            </ul>
+          </nav>
+
+          {this.state.showNavSideMenu ? this.navSideMenu() : <></>}
+        </header>
+      </>
+    );
+  }
 }
