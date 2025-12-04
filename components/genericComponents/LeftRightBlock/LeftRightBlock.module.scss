@@ -7,11 +7,10 @@
   margin: 0 17px 30px 18px;
 
   &--with-navigator {
-    /* extender no necesario: es la misma base, podría variar solo lo que cambia */
+    /* misma base, puedes ajustar si quieres */
   }
 
   &--last {
-    /* similar: si solo cambia margin-bottom, declararlo explícito en lugar de @extend */
     margin-bottom: 80px;
   }
 
@@ -20,17 +19,15 @@
     max-width: 400px;
     background-color: $color-purple-light;
 
-    &--reverse {
-      /* no necesita @extend: las propiedades base ya se heredan */
-    }
+    &--reverse { }
 
     &--with-navigator {
       max-width: 380px;
     }
 
-    &--green { background-color: $color-green-light; }
-    &--blue { background-color: $color-blue-light; }
-    &--red { background-color: $color-red-light; }
+    &--green  { background-color: $color-green-light; }
+    &--blue   { background-color: $color-blue-light; }
+    &--red    { background-color: $color-red-light; }
     &--purple { background-color: $color-purple-light; }
     &--yellow { background-color: $color-yellow-light; }
   }
@@ -54,46 +51,88 @@
     overflow-y: hidden;
     margin-bottom: 20px;
 
-    &--reverse {
-      /* si hay estilos específicos al reverse, decláralos aquí */
-    }
-    &--with-navigator {
-      /* idem */
-    }
+    &--reverse { }
+    &--with-navigator { }
   }
 
+  /* TEXTO: más pequeño + Verdana */
   &__large-text {
-    @include huge-text-font();
+    font-family: Verdana, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
 
     &--with-navigator {
-      @include larger-text-font();
+      font-size: 1.1rem;
+      line-height: 1.7;
       margin-bottom: 0;
     }
 
-    &--highlighted-green  { @include huge-text-font($color-green-normal); }
-    &--highlighted-blue   { @include huge-text-font($color-blue-normal); }
-    &--highlighted-red    { @include huge-text-font($color-red-normal); }
-    &--highlighted-purple { @include huge-text-font($color-purple-normal); }
-    &--highlighted-yellow { @include huge-text-font($color-yellow-normal); }
+    /* Colores destacados, mismo tamaño pequeño */
+    &--highlighted-green {
+      font-family: Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: $color-green-normal;
+    }
+    &--highlighted-blue {
+      font-family: Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: $color-blue-normal;
+    }
+    &--highlighted-red {
+      font-family: Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: $color-red-normal;
+    }
+    &--highlighted-purple {
+      font-family: Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: $color-purple-normal;
+    }
+    &--highlighted-yellow {
+      font-family: Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: $color-yellow-normal;
+    }
 
     &--highlighted-green--with-navigator {
-      @include larger-text-font($color-green-normal);
+      font-family: Verdana, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $color-green-normal;
       margin-bottom: 0;
     }
     &--highlighted-blue--with-navigator {
-      @include larger-text-font($color-blue-normal);
+      font-family: Verdana, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $color-blue-normal;
       margin-bottom: 0;
     }
     &--highlighted-red--with-navigator {
-      @include larger-text-font($color-red-normal);
+      font-family: Verdana, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $color-red-normal;
       margin-bottom: 0;
     }
     &--highlighted-purple--with-navigator {
-      @include larger-text-font($color-purple-normal);
+      font-family: Verdana, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $color-purple-normal;
       margin-bottom: 0;
     }
     &--highlighted-yellow--with-navigator {
-      @include larger-text-font($color-yellow-normal);
+      font-family: Verdana, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $color-yellow-normal;
       margin-bottom: 0;
     }
   }
@@ -127,7 +166,7 @@
     margin: 0 auto 60px;
 
     &--with-navigator {
-      display: block; /* o layout alternativo */
+      display: block;
       width: auto;
       margin: 0 40px 50px 40px;
     }
@@ -174,9 +213,5 @@
     &__image-container {
       max-width: none;
     }
-    &__image-container--reverse { /* idem, si aplica */ }
   }
 }
-
-/* Ajustes finales para >= 1400px y >= 1600px según necesites...
-   con la misma lógica: declarar áreas / columnas, evitar @extend redundantes. */

@@ -1,19 +1,18 @@
 ﻿@import "../../../styles/font-mixins.scss";
 
-
 .intro {
   margin: 40px 20px 50px;
 
   &--with-navigator {
     @extend .intro;
   }
-  
+
   &__text {
-    @include slightly-larger-text-font;
+    font-family: Verdana, sans-serif;
+    font-size: 1.4rem;   /* más grande que antes */
+    line-height: 1.8;
   }
 }
-
-
 
 @media only screen and (min-width: 500px) {
   .intro {
@@ -23,53 +22,3 @@
 }
 
 
-
-@media only screen and (min-width: 850px) {
-  .intro {
-    width: 780px;
-    margin: 80px auto 80px auto;
-    
-    &--with-navigator {
-      width: auto;
-      margin-left: 40px;
-      margin-right: 20px;
-    }
-  }
-}
-
-
-
-@media only screen and (min-width: 1250px) {
-  .intro {
-    // margin: 140px auto 140px auto;
-    
-    &--with-navigator {
-      display: block;
-      width: auto;
-    }
-  }
-}
-
-
-
-@media only screen and (min-width: 1400px) {
-  .intro {
-    width: 850px;
-
-    &--with-navigator {
-      width: auto;
-    }
-  }
-}
-
-
-
-@media only screen and (min-width: 1600px) {
-  .intro {
-    width: 900px;
-
-    &--with-navigator {
-      width: auto;
-    }
-  }
-}
