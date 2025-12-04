@@ -2,7 +2,9 @@
 @import "../../../styles/font-mixins";
 @import "../../../styles/colors";
 
-/* Botón (si last = true) */
+/* ============================
+   BOTÓN (last = true)
+============================ */
 .buttonlink-true {
   padding: 0 30px;
   border-radius: 30px;
@@ -31,21 +33,21 @@
   }
 }
 
-/* Links normales (last = false) */
+/* Links normales */
 .buttonlink-false {
   color: white !important;
   text-decoration: none;
 }
 
-/* ===========================
-   DESKTOP
-=========================== */
+/* ============================
+   DESKTOP NAVIGATION
+============================ */
 .main-header {
   @include header-font;
 
   /* Cada item del menú */
   &__nav-item-inner {
-    position: relative; /* NECESARIO para anclar el dropdown */
+    position: relative;
 
     &:hover {
       .main-header__nav-dropdown {
@@ -53,50 +55,64 @@
       }
 
       p.main-header__dropdown-item-maintext {
-        color: #d4af37; /* hover dorado */
+        color: #d4af37;
       }
     }
   }
 
-  /* Contenedor del dropdown */
+  /* Contenedor que centra el dropdown debajo */
   &__nav-dropdown-wrapper {
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: max-content;
+    padding-top: 10px;
+    width: auto;
+    z-index: 2000;
   }
 
-  /* Caja del dropdown */
+  /* Dropdown caja — VERSIÓN OSCURA + MÁS PEQUEÑA + SIN BORDES REDONDEADOS */
   &__nav-dropdown {
-    position: relative;
     display: none;
     flex-direction: column;
-    width: 460px;
-    padding: 15px;
-    border-radius: 14px;
-    border: 2px solid $color-default;
-    background-color: white;
-    z-index: 1000;
+    min-width: 180px;
+    background-color: #1a1a1a;       /* Fondo oscuro */
+    border: 1px solid #333;          /* Borde sutil */
+    padding: 10px 12px;
+    border-radius: 0;                /* SIN bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 3000;
   }
 
-  /* Cada fila del dropdown */
+  /* Cada opción del dropdown */
   &__dropdown-item-container {
     display: flex;
     align-items: center;
-    gap: 12px;   /* ESPACIO ENTRE IMAGEN Y TEXTO */
+    gap: 12px;
+    padding: 6px 8px;
     margin-bottom: 5px;
-    padding: 8px;
+
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    span, p {
+      color: white !important;
+    }
 
     &:hover {
-      background-color: $color-blue-ultra-light;
+      background-color: #333;
     }
   }
 }
 
-/* ===========================
-   MOBILE
-=========================== */
+/* ============================
+   MOBILE NAVIGATION
+============================ */
 .mobile-main-header {
   @include header-font;
 
@@ -128,8 +144,13 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 5px;
     padding: 8px;
+    margin-bottom: 5px;
+
+    img {
+      width: 48px;
+      height: 48px;
+    }
 
     &:hover {
       background-color: $color-blue-ultra-light;
@@ -137,32 +158,32 @@
   }
 }
 
-/* Imagen del submenu */
+/* ============================
+   IMAGEN DEL SUBMENÚ
+============================ */
 .submenu-image {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   object-fit: cover;
-  border-radius: 6px;
   background: #f2f2f2;
-  flex-shrink: 0;
+  border-radius: 4px;
 }
 
-/* Texto superior (barra negra) */
+/* Texto barra superior */
 p.main-header__dropdown-item-maintext {
-  margin-bottom: 0;
-  margin-left: 0;
-  font-family: Verdana, sans-serif;
+  margin: 0;
   color: white;
+  font-family: Verdana, sans-serif;
 }
 
-/* Texto dentro del dropdown */
+/* Texto del menú */
 p.main-header__dropdown-item-text {
-  margin-bottom: 0;
+  margin: 0;
   @include header-font;
 }
 
-/* Texto en negrita del dropdown */
+/* Texto en negrita */
 span.main-header__dropdown-item-text--highlighted {
-  margin-bottom: 0;
+  margin: 0;
   @include header-font($color-blue-normal);
 }
