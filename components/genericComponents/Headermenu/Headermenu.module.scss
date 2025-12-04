@@ -23,9 +23,9 @@
   width: 100%;
   max-width: 1440px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 15px 25px;
+  gap: 40px;
 }
 
 /* -----------------------
@@ -45,7 +45,7 @@
    Quitamos el filter para que el logo NO cambie de color.
 */
 .main-header__nav-home-logo {
-  height: 55px;
+  height: 80px;
   width: auto;
   cursor: pointer;
   filter: none !important;     /* <- Asegura que NO se invierta */
@@ -63,11 +63,20 @@
   display: flex;
   gap: 30px;
   align-items: center;
-  list-style: none;
+  list-style: none !important;
+  padding: 0;
+  margin: 0;
 }
 
-.main-header__nav-list li,
-.main-header__nav-list a {
+/* Los LI sin bullets y como contenedores flex */
+.main-header__nav-list li {
+  list-style: none !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Los enlaces estilizados correctamente */
+.main-header__nav-list li a {
   color: white !important;
   font-family: Verdana, sans-serif;
   font-size: 16px;
@@ -75,10 +84,11 @@
   cursor: pointer;
 }
 
-.main-header__nav-list a:hover,
-.main-header__nav-list li:hover {
-  color: #d4af37 !important; /* dorado */
+/* Hover dorado */
+.main-header__nav-list li:hover a {
+  color: #d4af37 !important;
 }
+
 
 /* -----------------------
    BURGER MENU
