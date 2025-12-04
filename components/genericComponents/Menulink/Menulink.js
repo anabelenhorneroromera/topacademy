@@ -4,44 +4,49 @@ import css from "./Menulink.module.scss";
 import { RichTextToHTML } from "../../../functions/storyBlokRichTextRenderer";
 import Link from "next/link";
 
-export default function Menulink({ blok, last, index, key, mobile }) {
+export default function Menulink({ blok, last, mobile }) {
+  
+  const linkUrl = blok?.link?.cached_url || "/";
+
+  const hasSubmenu = blok.submenulinks && blok.submenulinks.length > 0;
+
   return (
     <>
-      {/* ========================
-          MOBILE VERSION
-      ========================= */}
+      {/* ================= MOBILE ================= */}
       {mobile && (
-        <div
-          {...storyblokEditable(blok)}
-          className={css["mobile-main-header__nav-item-inner"]}
-        >
-          <Link href={blok.link.cached_url}>
-            <a className={css["buttonlink-" + last]}>
-              {RichTextToHTML({
-                document: blok.name,
-                textClassName: css["main-header__dropdown-item-maintext"],
-                boldClassName:
-                  css["main-header__dropdown-item-text--highlighted"],
-              })}
-            </a>
+        <div {...storyblokEditable(blok)} className={css["mobile-main-header__nav-item-inner"]}>
+          <Link href={linkUrl} className={css["buttonlink-" + last]}>
+            {RichTextToHTML({
+              document: blok.name,
+              textClassName: css["main-header__dropdown-item-maintext"],
+              boldClassName: css["main-header__dropdown-item-text--highlighted"]
+            })}
           </Link>
 
-          {blok.submenulinks && blok.submenulinks.length > 0 && (
+          {hasSubmenu && (
             <div className={css["mobile-main-header__nav-dropdown-wrapper"]}>
               <div className={css["mobile-main-header__nav-dropdown"]}>
-                {blok.submenulinks.map((sub, i) => (
-                  <Link key={sub._uid} href={"/" + sub.link.cached_url}>
-                    <a className={css["mobile-main-header__dropdown-item-container"]}>
-                      <img src={sub.icon.filename} alt={sub.icon.alt} />
-                      <div>
-                        {RichTextToHTML({
-                          document: sub.name,
-                          textClassName: css["main-header__dropdown-item-text"],
-                          boldClassName:
-                            css["main-header__dropdown-item-text--highlighted"],
-                        })}
-                      </div>
-                    </a>
+                {blok.submenulinks.map((submenulink) => (
+                  <Link
+                    key={submenulink._uid}
+                    href={"/" + submenulink.link.cached_url}
+                    className={css["mobile-main-header__dropdown-item-container"]}
+                  >
+                    {submenulink.icon?.filename && (
+                      <img
+                        src={submenulink.icon.filename}
+                        alt={submenulink.icon.alt || "submenu icon"}
+                        className={css["submenu-image"]}
+                      />
+                    )}
+
+                    <div>
+                      {RichTextToHTML({
+                        document: submenulink.name,
+                        textClassName: css["main-header__dropdown-item-text"],
+                        boldClassName: css["main-header__dropdown-item-text--highlighted"]
+                      })}
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -50,41 +55,41 @@ export default function Menulink({ blok, last, index, key, mobile }) {
         </div>
       )}
 
-      {/* ========================
-          DESKTOP VERSION
-      ========================= */}
+      {/* ================= DESKTOP ================= */}
       {!mobile && (
-        <div
-          {...storyblokEditable(blok)}
-          className={css["main-header__nav-item-inner"]}
-        >
-          <Link href={blok.link.cached_url}>
-            <a className={css["buttonlink-" + last]}>
-              {RichTextToHTML({
-                document: blok.name,
-                textClassName: css["main-header__dropdown-item-maintext"],
-                boldClassName:
-                  css["main-header__dropdown-item-text--highlighted"],
-              })}
-            </a>
+        <div {...storyblokEditable(blok)} className={css["main-header__nav-item-inner"]}>
+          <Link href={linkUrl} className={css["buttonlink-" + last]}>
+            {RichTextToHTML({
+              document: blok.name,
+              textClassName: css["main-header__dropdown-item-maintext"],
+              boldClassName: css["main-header__dropdown-item-text--highlighted"]
+            })}
           </Link>
 
-          {blok.submenulinks && blok.submenulinks.length > 0 && (
+          {hasSubmenu && (
             <div className={css["main-header__nav-dropdown-wrapper"]}>
               <div className={css["main-header__nav-dropdown"]}>
-                {blok.submenulinks.map((sub, i) => (
-                  <Link key={sub._uid} href={"/" + sub.link.cached_url}>
-                    <a className={css["main-header__dropdown-item-container"]}>
-                      <img src={sub.icon.filename} alt={sub.icon.alt} />
-                      <div>
-                        {RichTextToHTML({
-                          document: sub.name,
-                          textClassName: css["main-header__dropdown-item-text"],
-                          boldClassName:
-                            css["main-header__dropdown-item-text--highlighted"],
-                        })}
-                      </div>
-                    </a>
+                {blok.submenulinks.map((submenulink) => (
+                  <Link
+                    key={submenulink._uid}
+                    href={"/" + submenulink.link.cached_url}
+                    className={css["main-header__dropdown-item-container"]}
+                  >
+                    {submenulink.icon?.filename && (
+                      <img
+                        src={submenulink.icon.filename}
+                        alt={submenulink.icon.alt || "submenu icon"}
+                        className={css["submenu-image"]}
+                      />
+                    )}
+
+                    <div>
+                      {RichTextToHTML({
+                        document: submenulink.name,
+                        textClassName: css["main-header__dropdown-item-text"],
+                        boldClassName: css["main-header__dropdown-item-text--highlighted"]
+                      })}
+                    </div>
                   </Link>
                 ))}
               </div>

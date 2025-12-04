@@ -58,13 +58,13 @@
     }
   }
 
-  /* Contenedor que coloca el dropdown justo debajo del enlace */
+  /* Contenedor del dropdown */
   &__nav-dropdown-wrapper {
     position: absolute;
-    top: 100%;          /* justo debajo del item */
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
+    width: max-content;
   }
 
   /* Caja del dropdown */
@@ -80,39 +80,16 @@
     z-index: 1000;
   }
 
+  /* Cada fila del dropdown */
   &__dropdown-item-container {
     display: flex;
     align-items: center;
+    gap: 12px;   /* ESPACIO ENTRE IMAGEN Y TEXTO */
     margin-bottom: 5px;
-    padding: 5px;
-
-    img {
-      width: 48px;
-      height: 48px;
-    }
+    padding: 8px;
 
     &:hover {
       background-color: $color-blue-ultra-light;
-    }
-  }
-
-  &__expanded-nav-dropdown {
-    position: absolute;
-    left: 18px;
-    z-index: 1;
-    display: none;
-    flex-direction: column;
-    width: 460px;
-    max-width: 90vw;
-    margin-top: 10px;
-    padding: 15px;
-    border-radius: 14px;
-    border: 2px solid $color-default;
-    background-color: white;
-
-    &--open {
-      @extend .main-header__expanded-nav-dropdown;
-      display: flex;
     }
   }
 }
@@ -150,55 +127,41 @@
   &__dropdown-item-container {
     display: flex;
     align-items: center;
+    gap: 12px;
     margin-bottom: 5px;
-    padding: 5px;
-
-    img {
-      width: 48px;
-      height: 48px;
-    }
+    padding: 8px;
 
     &:hover {
       background-color: $color-blue-ultra-light;
     }
   }
-
-  &__expanded-nav-dropdown {
-    position: absolute;
-    left: 18px;
-    z-index: 1;
-    display: none;
-    flex-direction: column;
-    width: 460px;
-    max-width: 90vw;
-    margin-top: 10px;
-    padding: 15px;
-    border-radius: 14px;
-    border: 2px solid $color-default;
-    background-color: white;
-
-    &--open {
-      @extend .main-header__expanded-nav-dropdown;
-      display: flex;
-    }
-  }
 }
 
-/* Texto de los enlaces en la barra */
+/* Imagen del submenu */
+.submenu-image {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #f2f2f2;
+  flex-shrink: 0;
+}
+
+/* Texto superior (barra negra) */
 p.main-header__dropdown-item-maintext {
   margin-bottom: 0;
   margin-left: 0;
   font-family: Verdana, sans-serif;
-  color: white; /* BLANCO EN LA BARRA SUPERIOR */
+  color: white;
 }
 
 /* Texto dentro del dropdown */
 p.main-header__dropdown-item-text {
   margin-bottom: 0;
-  margin-left: 20px;
   @include header-font;
 }
 
+/* Texto en negrita del dropdown */
 span.main-header__dropdown-item-text--highlighted {
   margin-bottom: 0;
   @include header-font($color-blue-normal);
