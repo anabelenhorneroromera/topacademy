@@ -73,6 +73,7 @@ export default class HeadComponent extends Component {
 					s0.parentNode.insertBefore(s1,s0);})();`,
 			}}>
 			</Script>
+			<Script src="https://t.contentsquare.net/uxa/3c555d3028dc0.js"></Script>
 			<Script id="gascriptloader" src={gasource}></Script>
 			<Script id="gascriptwrapper" dangerouslySetInnerHTML={{
 				__html: `
