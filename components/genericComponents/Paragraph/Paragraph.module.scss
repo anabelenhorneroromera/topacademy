@@ -9,8 +9,11 @@
   }
 
   &__text {
-    @include slightly-larger-text-font;
+    .paragraph__text {
+  @include verdana-body-font;
+
   }
+}
 }
 
 
