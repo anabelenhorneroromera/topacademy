@@ -5,15 +5,11 @@
   margin: 40px 20px 50px;
 
   &--with-navigator {
-    @extend .paragraph;
   }
 
   &__text {
-    .paragraph__text {
-  @include verdana-body-font;
-
+    @include verdana-body-font; // apply Verdana font
   }
-}
 }
 
 
