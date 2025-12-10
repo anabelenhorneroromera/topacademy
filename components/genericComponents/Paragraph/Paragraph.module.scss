@@ -5,7 +5,10 @@
   margin: 40px 20px 50px;
 
   &--with-navigator {
-  }
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
 
   &__text {
     @include verdana-body-font; // apply Verdana font
