@@ -7,151 +7,126 @@ export default class Headermenu extends Component {
     super(props);
     this.state = {
       showNavSideMenu: false,
-      showSearchFlyout: false,
       expandedNavDropdownOpened: false,
     };
   }
 
-  toggleNavSideMenu(setPreventDefault, e) {
-    if (setPreventDefault) {
-      e.preventDefault();
-    }
-    this.setState((prevState) => ({
-      showNavSideMenu: !prevState.showNavSideMenu,
+  // Toggle menú lateral móvil
+  toggleNavSideMenu = (preventDefault, e) => {
+    if (preventDefault && e) e.preventDefault();
+    this.setState((prev) => ({
+      showNavSideMenu: !prev.showNavSideMenu,
       expandedNavDropdownOpened: false,
     }));
-  }
+  };
 
-  toggleExpandedNavDropdown(e) {
-    e.stopPropagation();
-    this.setState((prevState) => ({
-      expandedNavDropdownOpened: !prevState.expandedNavDropdownOpened,
-    }));
-  }
+  // Cerrar dropdown móvil
+  closeExpandedNavDropdown = () => {
+    this.setState({ expandedNavDropdownOpened: false });
+  };
 
-  closeExpandedNavDropdown() {
-    this.setState({
-      expandedNavDropdownOpened: false,
-    });
-  }
-
-  navSideMenu() {
+  /* ================= MOBILE SIDE MENU ================= */
+  navSideMenu = () => {
     return (
       <nav
         {...storyblokEditable(this.props.blok)}
         className={css["main-header__expanded-nav"]}
       >
         <ul
-          className={[css["main-header__expanded-nav-list"]].join("\n")}
-          onClick={this.closeExpandedNavDropdown.bind(this)}
+          className={css["main-header__expanded-nav-list"]}
+          onClick={this.closeExpandedNavDropdown}
         >
-          <li
-            className={css["main-header__expanded-nav-item--home"]}
-            key="mainlogo"
-          >
+          {/* Logo */}
+          <li className={css["main-header__expanded-nav-item--home"]}>
             <a href="/">
               <div className={css["main-header__nav-home-container"]}>
-                {/* LOGO NUEVO – PNG */}
                 <img
                   src="/images/logo/logo.png"
                   alt="logo"
                   className={css["main-header__nav-home-logo"]}
                 />
-                <img
-                  src="/images/logo/logo.png"
-                  alt="logo"
-                  className={css["main-header__nav-home-logo--mobile"]}
-                />
               </div>
             </a>
           </li>
 
-          {this.props.blok.menucontent.map((nestedBlok, index) => {
-            return (
-              <li
-                className={css[`main-header__expanded-nav-item--${index}`]}
-                key={nestedBlok._uid}
-              >
-                <StoryblokComponent
-                  blok={nestedBlok}
-                  last={false}
-                  index={index}
-                  mobile={true}
-                />
-              </li>
-            );
-          })}
+          {/* Menú dinámico desde Storyblok */}
+          {this.props.blok.menucontent?.map((nestedBlok, index) => (
+            <li
+              key={nestedBlok._uid}
+              className={css[`main-header__expanded-nav-item--${index}`]}
+            >
+              <StoryblokComponent
+                blok={nestedBlok}
+                mobile={true}
+                last={false}
+                index={index}
+              />
+            </li>
+          ))}
         </ul>
+
+        {/* Fondo oscurecido */}
         <div
           className={css["main-header__expanded-greyed-out-zone"]}
           role="button"
           tabIndex={-1}
-          onKeyPress={this.toggleNavSideMenu.bind(this, true)}
-          onClick={this.toggleNavSideMenu.bind(this, true)}
+          onClick={(e) => this.toggleNavSideMenu(true, e)}
         />
       </nav>
     );
-  }
+  };
 
+  /* ================= RENDER ================= */
   render() {
     return (
       <>
-        <header
-          {...storyblokEditable(this.props.blok)}
-          className={css["main-header"]}
-        >
+        <header {...storyblokEditable(this.props.blok)} className={css["main-header"]}>
           <nav className={css["main-header__nav"]}>
-            <nav className={css["main-header__nav-home"]}>
+            
+            {/* Logo principal */}
+            <div className={css["main-header__nav-home"]}>
               <a href="/">
                 <div className={css["main-header__nav-home-container"]}>
-                  {/* LOGO NUEVO – PNG */}
                   <img
                     src="/images/logo/logo.png"
                     alt="logo"
                     className={css["main-header__nav-home-logo"]}
                   />
-                  <img
-                    src="/images/logo/logo.png"
-                    alt="logo"
-                    className={css["main-header__nav-home-logo--mobile"]}
-                  />
                 </div>
               </a>
-            </nav>
+            </div>
 
+            {/* Menú desktop */}
             <ul className={css["main-header__nav-list"]}>
-              <li
-                key="sidenav"
-                className={css["main-header__nav-item--menu"]}
-              >
+              {/* Icono menú móvil */}
+              <li className={css["main-header__nav-item--menu"]}>
                 <span
                   className="mdi mdi-menu"
                   role="button"
                   tabIndex={0}
-                  onKeyPress={this.toggleNavSideMenu.bind(this, true)}
-                  onClick={this.toggleNavSideMenu.bind(this, true)}
+                  onClick={(e) => this.toggleNavSideMenu(true, e)}
                 />
               </li>
 
-              {this.props.blok.menucontent.map((nestedBlok, index) => {
-                return (
-                  <li
-                    className={css[`main-header__nav-item--${index}`]}
-                    key={nestedBlok._uid}
-                  >
-                    <StoryblokComponent
-                      blok={nestedBlok}
-                      last={false}
-                      index={index}
-                      mobile={false}
-                    />
-                  </li>
-                );
-              })}
+              {/* Links del menú (desktop) */}
+              {this.props.blok.menucontent?.map((nestedBlok, index) => (
+                <li
+                  key={nestedBlok._uid}
+                  className={css[`main-header__nav-item--${index}`]}
+                >
+                  <StoryblokComponent
+                    blok={nestedBlok}
+                    last={false}
+                    index={index}
+                    mobile={false}
+                  />
+                </li>
+              ))}
             </ul>
           </nav>
 
-          {this.state.showNavSideMenu ? this.navSideMenu() : null}
+          {/* Sidebar móvil */}
+          {this.state.showNavSideMenu && this.navSideMenu()}
         </header>
       </>
     );
