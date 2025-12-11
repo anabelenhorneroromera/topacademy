@@ -374,7 +374,7 @@
 }
 
 
-  @mixin verdana-body-font($color: $color-default) {
+  @mixin paragraph-font($color: $color-default) {
   font-family: Verdana, sans-serif;
   font-size: 1rem;
   line-height: 1.6;

@@ -11,7 +11,7 @@
     }
 
   &__text {
-    @include verdana-body-font; // apply Verdana font
+    @include paragraph-font; // apply Verdana font
   }
 }
 
