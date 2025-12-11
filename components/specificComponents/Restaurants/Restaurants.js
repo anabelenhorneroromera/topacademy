@@ -17,8 +17,8 @@ export default function Restaurant({ blok }) {
 
       {blok.description && <p>{blok.description}</p>}
 
-      {blok.items &&
-        blok.items.map((nestedBlok) => (
+      {blok.additionalstuff &&
+        blok.additionalstuff.map((nestedBlok) => (
           <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
     </div>
