@@ -1,34 +1,34 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 import Person from "../components/specificComponents/Person/Person";
 import Teacher from "../components/specificComponents/Teacher/Teacher";
-import Experience from '../components/specificComponents/Experience/Experience';
-import Hero from '../components/genericComponents/Hero/Hero';
-import Page from '../components/layoutComponents/Page/Page';
-import Headermenu from '../components/genericComponents/Headermenu/Headermenu';
-import Menulink from '../components/genericComponents/Menulink/Menulink';
-import Paragraph from '../components/genericComponents/Paragraph/Paragraph';
-import Intro from '../components/genericComponents/Intro/Intro';
-import LeftRightBlock from '../components/genericComponents/LeftRightBlock/LeftRightBlock';
-import Course from '../components/specificComponents/Course/Course';
-import List from '../components/genericComponents/List/List';
-import Element from '../components/genericComponents/Element/Element';
-import OneCol from '../components/layoutComponents/OneCol/OneCol';
-import TwoCol from '../components/layoutComponents/TwoCol/TwoCol';
-import ThreeCol from '../components/layoutComponents/ThreeCol/ThreeCol';
-import ImageCarousel from '../components/genericComponents/ImageCarousel/ImageCarousel';
-import Product from '../components/specificComponents/Product/Product';
-import Location from '../components/specificComponents/Location/Location';
-import Artist from '../components/specificComponents/Artist/Artist';
-import Song from '../components/specificComponents/Song/Song';
-import Restaurant from '../components/specificComponents/Restaurants/Restaurants';
+import Experience from "../components/specificComponents/Experience/Experience";
+import Hero from "../components/genericComponents/Hero/Hero";
+import Page from "../components/layoutComponents/Page/Page";
+import Headermenu from "../components/genericComponents/Headermenu/Headermenu";
+import Menulink from "../components/genericComponents/Menulink/Menulink";
+import Paragraph from "../components/genericComponents/Paragraph/Paragraph";
+import Intro from "../components/genericComponents/Intro/Intro";
+import LeftRightBlock from "../components/genericComponents/LeftRightBlock/LeftRightBlock";
+import Course from "../components/specificComponents/Course/Course";
+import List from "../components/genericComponents/List/List";
+import Element from "../components/genericComponents/Element/Element";
+import OneCol from "../components/layoutComponents/OneCol/OneCol";
+import TwoCol from "../components/layoutComponents/TwoCol/TwoCol";
+import ThreeCol from "../components/layoutComponents/ThreeCol/ThreeCol";
+import ImageCarousel from "../components/genericComponents/ImageCarousel/ImageCarousel";
+import Product from "../components/specificComponents/Product/Product";
+import Location from "../components/specificComponents/Location/Location";
+import Artist from "../components/specificComponents/Artist/Artist";
+import Song from "../components/specificComponents/Song/Song";
 
+// ✅ IMPORT CORRECTO (ajusta la ruta si tu carpeta se llama distinto)
+import Restaurant from "../components/specificComponents/Restaurant/Restaurant";
 
 const components = {
   person: Teacher,
@@ -51,7 +51,9 @@ const components = {
   location: Location,
   artist: Artist,
   song: Song,
-  restaurants: Restaurant
+
+  // ✅ content type "restaurants" de Storyblok
+  restaurants: Restaurant,
 };
 
 storyblokInit({
@@ -61,26 +63,20 @@ storyblokInit({
 });
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter()
-  //on routechange we log a google pageview
+  const router = useRouter();
+
   useEffect(() => {
-    //on routechange we log a google pageview
     const handleRouteChange = (url) => {
-      //ga.pageview(url)
-    }
-    //
+      // ga.pageview(url)
+    };
 
+    router.events.on("routeChangeComplete", handleRouteChange);
 
-    //When the component is mounted, subscribe to router changes
-    //and log those page views
-    router.events.on('routeChangeComplete', handleRouteChange)
-
-    // If the component is unmounted, unsubscribe
-    // from the event with the `off` method
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   return <Component {...pageProps} />;
 }
 
