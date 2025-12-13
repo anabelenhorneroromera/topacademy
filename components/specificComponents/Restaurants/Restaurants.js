@@ -1,26 +1,41 @@
-// specificComponents/Restaurant.js
 import React from "react";
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
+import { RichTextToHTML } from "../../../functions/storyBlokRichTextRenderer";
+import { getDefaultStoryBlokImageSet } from "../../../functions/StoryBlokImageHelper";
 
 export default function Restaurant({ blok }) {
-  return (
-    <div
-      {...storyblokEditable(blok)}
-      key={blok._uid}
-      id={blok.component === "list" ? "restaurants-list" : undefined}
-    >
-      {blok.name && <h2>{blok.name}</h2>}
+  const title = typeof blok.title === "string" ? blok.title : "";
 
+  return (
+    <article {...storyblokEditable(blok)} style={{ marginBottom: "40px" }}>
+      {/* Imagen */}
       {blok.image?.filename && (
-        <img src={blok.image.filename} alt={blok.image.alt || ""} />
+        <div style={{ maxWidth: "900px" }}>
+          {getDefaultStoryBlokImageSet(
+            blok.image.filename,
+            blok.image.alt || title,
+            { largestImageWidth: 1200, largestImageHeigth: 800 },
+            900,
+            ""
+          )}
+        </div>
       )}
 
-      {blok.description && <p>{blok.description}</p>}
+      {/* Título */}
+      {title && <h2 style={{ marginTop: "16px" }}>{title}</h2>}
 
-      {blok.additionalstuff &&
+      {/* Description (Richtext) */}
+      {blok.description &&
+        RichTextToHTML({
+          document: blok.description,
+          textClassName: "",
+        })}
+
+      {/* Additional blocks */}
+      {Array.isArray(blok.additionalstuff) &&
         blok.additionalstuff.map((nestedBlok) => (
           <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
         ))}
-    </div>
+    </article>
   );
 }
