@@ -27,8 +27,11 @@ import Location from "../components/specificComponents/Location/Location";
 import Artist from "../components/specificComponents/Artist/Artist";
 import Song from "../components/specificComponents/Song/Song";
 
-// ✅ IMPORT CORRECTO (ajusta la ruta si tu carpeta se llama distinto)
-import Restaurant from "../components/specificComponents/Restaurant/Restaurant";
+/**
+ * ✅ IMPORT CORRECTO SEGÚN TU ESTRUCTURA REAL
+ * (porque tu proyecto tiene: components/specificComponents/Restaurants/Restaurants.js)
+ */
+import Restaurant from "../components/specificComponents/Restaurants/Restaurants";
 
 const components = {
   person: Teacher,
@@ -52,7 +55,10 @@ const components = {
   artist: Artist,
   song: Song,
 
-  // ✅ content type "restaurants" de Storyblok
+  /**
+   * ✅ content type en Storyblok se llama EXACTAMENTE: "restaurants"
+   * por eso la clave debe ser "restaurants"
+   */
   restaurants: Restaurant,
 };
 
