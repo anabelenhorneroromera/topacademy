@@ -22,7 +22,7 @@ export default function Restaurant({ blok }) {
       )}
 
       {/* Título */}
-      {title && <h2 style={{ marginTop: "16px" }}>{title}</h2>}
+      {title && <h2 style={{ verdana: "12px" }}>{title}</h2>}
 
       {/* Description (Richtext) */}
       {blok.description &&
