@@ -2,15 +2,17 @@ import React from "react";
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 import { RichTextToHTML } from "../../../functions/storyBlokRichTextRenderer";
 import { getDefaultStoryBlokImageSet } from "../../../functions/StoryBlokImageHelper";
+import css from "./Restaurants.module.scss";
 
 export default function Restaurant({ blok }) {
   const title = typeof blok.title === "string" ? blok.title : "";
 
   return (
-    <article {...storyblokEditable(blok)} style={{ marginBottom: "40px" }}>
+    <article {...storyblokEditable(blok)} className={css["restaurants-page"]}>
+      
       {/* Imagen */}
       {blok.image?.filename && (
-        <div style={{ maxWidth: "900px" }}>
+        <div className={css["restaurants-page__image"]}>
           {getDefaultStoryBlokImageSet(
             blok.image.filename,
             blok.image.alt || title,
@@ -22,13 +24,17 @@ export default function Restaurant({ blok }) {
       )}
 
       {/* Título */}
-      {title && <h2 style={{ verdana: "12px" }}>{title}</h2>}
+      {title && (
+        <h2 className={css["restaurants-page__title"]}>
+          {title}
+        </h2>
+      )}
 
-      {/* Description (Richtext) */}
+      {/* Description */}
       {blok.description &&
         RichTextToHTML({
           document: blok.description,
-          textClassName: "",
+          textClassName: css["restaurants-page__description"],
         })}
 
       {/* Additional blocks */}
@@ -39,3 +45,4 @@ export default function Restaurant({ blok }) {
     </article>
   );
 }
+
