@@ -10,16 +10,16 @@
   }
 
   &__title {
-    font-family: Verdana, sans-serif; /* ✅ Verdana */
+    font-family: Verdana, sans-serif;
     font-size: 24px;
     font-weight: 700;
-    color: black;                     /* ✅ Negro */
+    color: black;          /* ✅ NEGRO */
     margin: 0 0 16px 0;
   }
 
   &__description {
     font-family: Verdana, sans-serif;
-    color: $color-grey-dark;
+    color: black;          /* ✅ NEGRO (sin variables inexistentes) */
     line-height: 1.6;
     margin-bottom: 20px;
   }
